@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#14211f" />
+  <title>CATOS / 学生 Workspace</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-catos-role="student">
+  <div id="splash" class="splash-screen" aria-label="CATOSを起動中">
+    <div class="splash-inner"><div class="splash-mark">C<span>·</span></div><div class="splash-word">CATOS</div><p>Campus Attendance &amp; Task Operation System</p><div class="splash-loader"><i></i></div><small>WORKSPACE INITIALIZING</small></div>
+  </div>
+  <div id="onboarding" class="onboarding-screen" hidden>
+    <div class="onboarding-card"><div class="onboarding-brand"><div class="brand-mark">C<span>·</span></div><strong>CATOS</strong></div><div class="onboarding-progress"><i></i></div><p class="eyebrow">FIRST-TIME SETUP / ACCOUNT</p><h1>まず、あなたの<br><em>アカウント</em>を教えてください。</h1><p class="onboarding-lede">CATOSは、所属と名前に合わせて今日の授業・出席状況を表示します。入力した情報はこの端末内にのみ保存されます。</p><form id="accountForm" class="account-form"><label>表示名 <span>必須</span><input name="displayName" required maxlength="30" placeholder="例：河野 さやか" autocomplete="name"></label><label>大学ID / 学籍番号 <span>必須</span><input name="accountId" required maxlength="40" placeholder="例：ds20260123" autocomplete="username"></label><div class="form-row"><label>所属キャンパス<select name="campus"><option>大阪成蹊大学</option><option>大阪成蹊短期大学</option><option>その他</option></select></label><label>アカウント種別<select name="role"><option value="student">学生</option><option value="faculty">教員</option><option value="admin">事務</option></select></label></div><label class="check-label"><input type="checkbox" name="consent" required><span>この端末にアカウント情報を保存することに同意します</span></label><button class="button primary onboarding-submit" type="submit">CATOSをはじめる <span>→</span></button></form><p class="onboarding-note">※ 本番版では大学の認証基盤と接続します。このZIP版はローカルデモです。</p></div>
+  </div>
+  <div id="app" class="app-shell">
+    <aside class="sidebar" aria-label="メインナビゲーション">
+      <div class="brand-lockup"><div class="brand-mark">C<span>·</span></div><div><strong>CATOS</strong><small>Campus Operation System</small></div></div>
+      <div class="campus-card"><span class="status-dot"></span><div><small>CONNECTED CAMPUS</small><strong id="sideCampus">大阪成蹊大学</strong><em>データサイエンス学部</em></div></div>
+      <nav class="main-nav"><p class="nav-label">WORKSPACE</p><button class="nav-item active" data-view="today"><span>◈</span>今日の運用 <b>4</b></button><button class="nav-item" data-view="timetable"><span>▦</span>時間割</button><button class="nav-item" data-view="courses"><span>◎</span>履修・授業</button><button class="nav-item" data-view="history"><span>↗</span>出席履歴</button><p class="nav-label secondary">SYSTEM</p><button class="nav-item" data-view="sync"><span>⟳</span>同期センター</button><button class="nav-item" data-view="settings"><span>⚙</span>設定</button></nav>
+      <div class="sidebar-foot"><div class="avatar" id="sideAvatar">KS</div><div><strong id="sideName">アカウント未設定</strong><small id="sideRole">初回設定を完了してください</small></div><button id="logoutBtn" title="アカウントを切り替える">↗</button></div>
+    </aside>
+    <main class="main-content"><header class="topbar"><div class="breadcrumb"><span id="pageKicker">TODAY / OVERVIEW</span><span class="slash">/</span><strong id="pageTitle">今日の運用</strong></div><div class="top-actions"><div class="sync-badge"><span class="status-dot"></span><span>最終同期 <b id="lastSync">09:42</b></span></div><button class="icon-btn" id="notifyBtn" aria-label="通知">♧<i></i></button><button class="profile-chip" id="profileBtn"><span class="avatar small" id="topAvatar">KS</span><span id="topName">アカウント設定</span><span>⌄</span></button></div></header><section id="viewRoot" class="view-root"></section></main>
+  </div>
+  <div class="toast" id="toast" role="status"></div><input id="importFile" type="file" accept=".csv,.json,application/json,text/csv" hidden>
+  <dialog id="punchDialog"><form method="dialog" id="punchForm"><button class="dialog-close" value="cancel">×</button><p class="eyebrow">ATTENDANCE PUNCH</p><h2 id="dialogCourse">授業名</h2><p class="muted" id="dialogMeta">月曜 2限 · 教室</p><label>出席パスワード<input id="attendancePassword" type="password" placeholder="担当教員から共有されたコード" autocomplete="off" /></label><div class="dialog-note">この画面はローカルデモです。送信すると端末内の履歴に記録されます。</div><div class="dialog-actions"><button class="button ghost" value="cancel">キャンセル</button><button class="button primary" id="submitPunch" value="default">出席を送信 <span>→</span></button></div></form></dialog>
+  <script src="app.js"></script>
+</body>
+</html>
